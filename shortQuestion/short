@@ -1,0 +1,118 @@
+1. 
+Compare and contrast IPV4 and IPV6 highlights the similarities and differences between the two protocols?
+
+similarirty: 
+both are used for ip layer internet protocal 
+both have header field such as version, header len, source ip, destine ip, etc . 
+both are connectionless protocol
+both do not have any active congestion control 
+both use datagram as frame format
+
+difference:  
+ipv4 is older than ipv6
+ipv4 total address capacity is much smaller than ipv6
+ipv4 have check sum while ipv6 do not 
+all other header field in ip4 is different from ip6
+ipv4 using numerical address mode 
+ipv6 using alpha_numerical
+ipv4 was original designed with class and ipv6 have categoty 1-7 
+ipv4 and 6 have different secure standards 
+
+
+--------------------------------------------
+2. 
+What are the main differences between routing and forwarding?
+
+
+
+--------------------------------------------
+3. 
+What are software-defined networks, and how they are different from traditional routing 
+
+
+--------------------------------------------
+4. What are the most common methods to implement the switch fabric in the routers?
+
+
+--------------------------------------------
+5. When a large datagram is fragmented into multiple smaller datagrams, are these smaller datagrams reassembled into a single larger datagram? [4 points]
+
+At the destine host, they will be reassembled. 
+But during the hops, they are not reassembled. They travel independently. 
+
+--------------------------------------------
+6.
+What is a private network address? Should a datagram with a private network address ever be
+present in the larger public Internet? Explain.
+
+In the designe ip4, 3 set of ip address was desiganated as private address. 
+Thoes address can be used without permission from internet authority and thus can be repeated used by different user. 
+That means if any message with a private address is detected by router in the internet, the message will be dropped. 
+Ip6 also inherit this design priciple. 
+
+
+A private address host, if want to communicate with outside, must send its message to a router designated to handle subnet, swap the address in its NAT, then being sent to outside world. 
+
+--------------------------------------------
+7.
+Suppose there are 35 hosts in a subnet. What should the IP address structure look like?
+
+becasue there are 35 host,  we need at least 64 bit to mask them, thus 2^(32-n) = 64, n=26
+
+xxxx.xxxx.xxyy.yyyy/26
+
+
+--------------------------------------------
+8.
+Compare and contrast the properties of a centralized and a distributed routing algorithm. Give
+an example of a routing protocol that takes a centralized and decentralized approach. [4 points]
+
+--------------------------------------------
+9.
+Compare and contrast static and dynamic routing algorithms.
+
+--------------------------------------------
+10. 
+Define and contrast the following terms: subnet, prefix, and BGP route.
+
+Subnet:
+During the era of classful address, the subnetting was introduced. It allows an organization, who just being grant a large block of adress, to divide into several contigous group and assign each group to samller network(subnet). 
+
+A subnet is a logical subdivision of an block of ip
+
+The boundaries of the subnet are defined by the router. 
+
+
+
+Prefix: 
+During the era of classless addressing, prefix was introduced. In this era, when a block of address was not subnetted, it can be viewed as a 2 level architechture, with the 32-n bit define organization network (or we call prefix), and n bit define individual host (we call surfix). 
+
+Some book say its part of CIDR notation, which is partially correct. prefix and CIDR use the same concept but are diffentn thing since its inception. 
+
+
+BGP route: 
+A protocol used for automouns system. 
+Since internet is network of smaller network, each router in work must know where to forward its packet. 
+BGP route is a infomation package which include details about a router's immediate linked hop(defiend by prefix), and this BGP route will be periodically snet by each router across the network to update it's neirbor's table. 
+In other work, BGP use prefix to identify a gruop of ip.
+
+
+--------------------------------------------
+11.
+Names four different types of ICMP messages
+
+ICMP can be divided into 2 sub category, error message and query message. 
+In error reporting message, there are commonly  5 types: 
+destine unreachange: type 3
+source quench: type 4
+time exceeded: tpye 11 
+paramater problem: type 12 
+redirection: type 5
+
+In query message there are commonly 4 types: 
+echo request/reply: type 8 code 0
+timestamp: type 13 code 0 
+address mask: type 17 code 18
+router solicitation/advertisment: type 10 code 9
+
+

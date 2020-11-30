@@ -1,0 +1,69 @@
+Cady Liu 
+Assigment 3 
+Question 1.2
+
+
+
+Description: 
+
+Detect the status of a given port at a given IP address. The status of the port could be open—close—filtered. The port could be TCP or UDP. The job description contains at least the target IP and port number.
+
+
+
+
+Summary: 
+
+1. Job seeker will craft a UDP and a TCP segement based on given IP and port number. 
+2. Both segement will be wrapped by IP layer, and will be send to destination. 
+3. If the port is not avaliable, then the job seeker will recieve two ICMP mesage "destination unreachable" type 3, code 3. 
+4. If the port is filtered, job seeker will recieve no message at all (both packet will be dropped without reply). 
+5. If the port is active, then the job seeker will recieve: 
+	If the port is TCP only: one TCP hadnshake, and one UDP ICMP mesage "destination unreachable" type 3, code 3.
+	If the port is UDP only: one TCP ICMP mesage "destination unreachable" type 3, code 3, and no response for UDP segment. 
+	If the port is for both: One TCP handshake and no message for UDP. 
+
+
+Design: 
+
+Job creator send request
+------------------------ 
+1 job creator inlcude two string (IP and port number) in its application protocol's data segment. 
+2. job creator send this (segment) to transport layer / IP layer through scoket.  
+3.  After transport / network layer add thier header and tailer, link layer make it into frame and sent to physical layer, which in turn send on the network.
+
+Job seeker uppacked target info and prepare UDP TCP segement
+----------------------------------------------------------------
+4. job seeker reveive the bit stream, assemble and unpack all the layer up to application layer. 
+5. Once retrived the strings (ip and port), job seeker call pcpp to create two packet, one UDP, one TCP. 
+
+6. Set TCP 
+	source port = host ps port 
+	destine port = target port 
+	all the rest to default 
+   Set UDP 
+	source port = host ps port 
+	destine port = target port 	 
+	all the rest to default 
+	
+7. set data section to null. 	 
+8. job seeker call pcpc::?? to create ip object.
+9. set IP header: 
+	source ip = host id 
+	destine ip = target ip
+	....
+10. encapuslate ICMP inside IP packet's data segement. 
+11. send out ip packet 
+
+Job seeker wait response and create final report 
+------------------------------------------------
+12. If the job seeker recieve two ICMP mesage "destination unreachable" type 3, code 3, then the target port is not avaliable.
+13. If job seeker will recieve no message at all (both packet will be dropped without reply), then the port is filtered.
+14. If the job seeker recieve TCP hadnshake, and one UDP ICMP mesage "destination unreachable" type 3, code 3, then the port is active and is designed for TCP.
+15. If the job seeker recive one TCP ICMP mesage "destination unreachable" type 3, code 3, and no response for UDP segment, then the port is active and desgin for UDP. 
+16. if the job seeker recive TCP handshake and no message for UDP, then the port is active and can be used for both TCP and UDP. 
+17. job seeker craft report for job creator. 
+
+Job seeker send report and complete job
+---------------------------------------
+14. job seeker package report into application layer 's data segement, pass it down all the way to datalink layer frame (through socket), and send it back to job creator. 
+15. End. 

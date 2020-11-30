@@ -1,0 +1,58 @@
+Cady Liu
+Assigment 3
+Question 1.1
+
+
+Description: 
+Detect if a given IP address or Host Name is online or not. The job creator would like the job seeker to find out if a given IP address is contacted to the network or not. The job description contains at least the target IP. 
+
+
+
+Summary: 
+0. Assume the IP address is used for idetifying target.
+1. Job seeker will craft a ICMP echo query message. 
+2. A IP packet will be created with ip set to tarket ip, and ICMP packet insert into its data section.
+3. The IP packet will be sent. 
+4. If the target port is active, then job seeker will recieve a echo-reply ICMP message. 
+5. If the target port is non-active, then the packet will time out and job seeker will recieve no message. (router will not reply ICMP on ICMP)
+	
+
+
+
+Design: 
+
+Job creator send request
+------------------------ 
+1 job creator inlcude a string (IP which it want to be tested) in its application protocol's data segment. 
+2. job creator send this (segment) to transport layer / IP layer through scoket.  
+3.  After transport / network layer add thier header and tailer, link layer make it into frame and sent to physical layer, which in turn send on the network.
+
+
+Job seeker uppacked target IP and create ICMP encapslated in IP 
+----------------------------------------------------------------
+4. job seeker reveive the bit stream, assemble and unpack all the layer up to application layer. 
+5. Once retrived the string (which is the target ip addres), job seeker call pcpp::lcmplayer object to create an ICMP echo query. 
+6. set ICMP echo query header:
+	type=8
+	code=0
+	identifier =0
+	sequence number =0 
+7. set ICMP data to null. 	 
+8. job seeker call pcpc::?? to create ip object.
+9. set IP header: 
+	source ip = host id 
+	destine ip = target ip
+	....
+10. encapuslate ICMP inside IP packet's data segement. 
+11. send out ip packet, and set a timer in case of no reply. 
+
+
+Job seeker wait response and create final report 
+------------------------------------------------
+12. if successfully recived echo-reply ICMP from target IP job seeker craft an success report for job creator. 
+13. if time out, job seeker craft an fail report to job creator. 	
+
+Job seeker send report and complete job
+---------------------------------------
+14. job seeker package report into application layer 's data segement, pass it down all the way to datalink layer frame (through socket), and send it back to job creator. 
+15. End. 
