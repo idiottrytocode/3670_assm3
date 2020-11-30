@@ -5,13 +5,13 @@ Question 1.2
 
 
 Description: 
-The job creator ask more than one job seeker to execute an ICMP flood attack against a given IP or subnet
+2. The job creator ask more than one job seeker to execute a TCP flood attack ( any TCP flood attack) against a given port on a given IP
 
 
 Summary: 
 0. Job creator send IP to mutiple job seekers 
-1. Job seeker use create a ICMP packet with header set to type 8 code 3 to conduct the attack.
-2. Job seeker create IP pakcet, insert ICMP inside its data section, and set IP header with destine ip = target ip
+1. Job seeker use create a TCP packet with header 
+2. Job seeker create IP pakcet, insert TCP inside its data section, and set IP header with destine ip = target ip
 3. Job seeker execute attack by entering a 10000000 loop to send IP packet to target.
 
 
@@ -28,15 +28,15 @@ Job creator send request (target IP) to job seekers
 Job seeker uppacked target info and prepare ICMP segement
 ----------------------------------------------------------------
 1. Job seeker unpack the job following communication rule. 
-2. seeker call ??? object to create ICMP packet. 
+2. seeker call TCPpacket object to create TCP pakcet. 
 3. seeker set ICMP header type =8, code =3, data section to null. 
-4. seeker call ??? object to create IP pakcet. 
+4. seeker call TCPPacket object to create IP pakcet. 
 5. seeker set IP header destine ip = target ip, source ip to random ip, insert ICMP into IP data section. 
 
 Job seeker enter large loop to commence attack
 ------------------------------------------------
 1. enter loop 100000000
-2. call ??? mehtod to send out IP packet. 
+2. call TCPPacket mehtod to send out IP packet. 
 3. terminate once loop is done.  
 
 Job seeker report success and terminate connection 
