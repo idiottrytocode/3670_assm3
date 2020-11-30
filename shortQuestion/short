@@ -23,16 +23,26 @@ ipv4 and 6 have different secure standards
 2. 
 What are the main differences between routing and forwarding?
 
+forwarding was originated from the 70s telephone tech, while routing was more advanced. 
+forwarding focus on source-destine processing while routing focus on hip to hop transfer. 
+The sum of all routing combine is equal in effect to forwarding. 
 
 
 --------------------------------------------
 3. 
 What are software-defined networks, and how they are different from traditional routing 
 
+The idea of programmability is the basis for the most precise definition of what SDN is: technology that separates the control plane management of network devices from the underlying data plane that forwards network traffic.
+
+
+SDN can interact with user via programing while traditonal routing can not. 
+SDN use software type to define itself whiel traditional use hardware type to define its architech. 
+SDN can use vitual connection while hardware based can not. 
 
 --------------------------------------------
 4. What are the most common methods to implement the switch fabric in the routers?
 
+The most traditional way was via memory. This was then repalced by the data bus. Now most router use interconnected network to accomplish the task. 
 
 --------------------------------------------
 5. When a large datagram is fragmented into multiple smaller datagrams, are these smaller datagrams reassembled into a single larger datagram? [4 points]
@@ -45,7 +55,7 @@ But during the hops, they are not reassembled. They travel independently.
 What is a private network address? Should a datagram with a private network address ever be
 present in the larger public Internet? Explain.
 
-In the designe ip4, 3 set of ip address was desiganated as private address. 
+In the early designe of ip4, 3 set of ip address was desiganated as private address. 
 Thoes address can be used without permission from internet authority and thus can be repeated used by different user. 
 That means if any message with a private address is detected by router in the internet, the message will be dropped. 
 Ip6 also inherit this design priciple. 
@@ -67,10 +77,32 @@ xxxx.xxxx.xxyy.yyyy/26
 Compare and contrast the properties of a centralized and a distributed routing algorithm. Give
 an example of a routing protocol that takes a centralized and decentralized approach. [4 points]
 
+centralized algo:
+	recieve periodic status update from all internet component on its neighbors.
+	update overall topologies. 
+	all transmition is via the cerntral node. 
+	can easily be congested if the volume surge unexpectely. 
+	or can be wasted if volume keep low. 
+
+distributed algo:
+	allow node to work locally, and reserve a smaller capacity 
+	each node have a piece of global table which can refer to the correct sub-group. 
+	the topology are much complex but reduce single point failure. 
+	
 --------------------------------------------
 9.
 Compare and contrast static and dynamic routing algorithms.
 
+static routring are much more easier to do because:
+	it table is static and no complex update algo is needed. 
+	it can handle a small set of destine. 
+	admin can define it once use it forever. 
+dynamic routing is more powerful becuase: 
+	constant update to reflect the current status on the network.
+	use complex and power algo for optimizing its capacity.
+	all automated process 
+	good for industrial standard network 
+	difficult to understand and need trainner to manipulate. 
 --------------------------------------------
 10. 
 Define and contrast the following terms: subnet, prefix, and BGP route.
